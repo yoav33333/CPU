@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Assembler {
     static REG r0 = new REG(0);
@@ -26,6 +28,7 @@ public class Assembler {
     static OP CMP = new OP(13);
     static OP JL = new OP(14);
     static HashMap<String, Integer> labels = new HashMap<String, Integer>();
+    static List<instraction> instractions = new ArrayList<instraction>();
 
     static StringBuilder BIN = new StringBuilder("000000000000000000000000111100001111111111111111");
     static int addressCounter = 3;
@@ -67,21 +70,8 @@ public class Assembler {
         return hexString;
     }
     public static void OpBase(OP op, REG reg1, Object arg2) {
-        if (arg2 instanceof REG) {
-            BIN.append("00000" + ((REG) arg2).getId() + "0" + reg1.getId() + op.getId());
-            addressCounter++;
-        } else if (arg2 instanceof Integer) {
-            String value = Integer.toBinaryString((Integer) arg2);
-            StringBuilder sb = new StringBuilder("0000000000000000");
-            sb.replace(sb.length() - value.length(), sb.length(), value);
-            value = sb.toString();
-            System.out.println("00000000" + "1" + reg1.getId() + op.getId()+value);
-            BIN.append("00000000" + "1" + reg1.getId() + op.getId()+value);
-            addressCounter += 2;
-        }
-        else {
-            throw new IllegalArgumentException("Invalid argument type for " + op.getId() + " operation");
-        }
+        addressCounter += arg2 instanceof REG ? 1 : 2;
+        instractions.add(new instraction(op, reg1, arg2));
     }
 
     public Assembler MOV(REG arg1, Object arg2) {
@@ -117,15 +107,15 @@ public class Assembler {
         return this;
     }
     public Assembler JZ(String label) {
-        OpBase(JZ, r0, labels.get(label));
+        OpBase(JZ, r0, label);
         return this;
     }
     public Assembler JS(String label) {
-        OpBase(JS, r0, labels.get(label));
+        OpBase(JS, r0, label);
         return this;
     }
     public Assembler JMP(String label) {
-        OpBase(JMP, r0, labels.get(label));
+        OpBase(JMP, r0, label);
         return this;
     }
     public Assembler WRT(REG val, Object address) {
@@ -159,6 +149,13 @@ public class Assembler {
         return this;
     }
     public void build(){
+
+        System.out.println(labels);
+        for (int i = 0; i<instractions.size(); i++) {
+
+            System.out.println(i);
+            BIN.append(instractions.get(i).runInstruction(labels));
+        }
         System.out.println(bitsToHexConversion(BIN.toString()));
     }
 

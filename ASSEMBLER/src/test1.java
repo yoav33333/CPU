@@ -10,10 +10,14 @@ public class test1 {
 
     public static void main(String[] args) {
         new Assembler()
+                .MOV(r0, 5)
                 .Label("fib")
+                .SUB(r0,1)
                 .ADD(r1, 1)
+                .CMP(r0,0)
+                .JZ("done")
                 .JMP("fib")
-
+                .Label("done")
                 .build();
     }
 }
