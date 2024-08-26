@@ -3978,12 +3978,9 @@
     <comp lib="3" loc="(470,310)" name="Comparator">
       <a name="width" val="16"/>
     </comp>
-    <comp lib="4" loc="(500,300)" name="Register">
-      <a name="appearance" val="logisim_evolution"/>
-      <a name="width" val="2"/>
-    </comp>
     <wire from="(470,310)" to="(480,310)"/>
     <wire from="(470,320)" to="(470,330)"/>
     <wire from="(470,320)" to="(480,320)"/>
+    <wire from="(500,330)" to="(560,330)"/>
   </circuit>
 </project>
