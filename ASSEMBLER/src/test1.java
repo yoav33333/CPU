@@ -8,8 +8,25 @@ public class test1 {
     static REG bp = new REG(6);
     static REG sp = new REG(7);
 
+
     public static void main(String[] args) {
-        new Assembler().CALL("i").JMP("done").Label("i")
-                .MOV(r0, 40).RET().Label("done").build();
+        new Assembler()
+                .MOV(r0, 5)
+                .CALL("fib")
+                .JMP("f")
+                .Label("fib")
+                .PUSH(bp)
+                .MOV(bp, sp)
+                .SUB(r0, 1)
+                .CMP(r0, 0)
+                .JZ("f")
+                .JMP("fib")
+                .POP(bp)
+                .RET()
+                .Label("f")
+                .build();
+
+
+
     }
 }

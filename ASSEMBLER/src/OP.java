@@ -1,7 +1,6 @@
 public class OP {
     String id;
     static String base = "0000";
-    String Temp;
     public OP(int id) {
         this.id = Integer.toBinaryString(id);
         StringBuilder sb = new StringBuilder(base);

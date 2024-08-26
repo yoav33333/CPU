@@ -62,10 +62,6 @@
       <a name="label" val="OUT_FROM_RAM"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(1090,1070)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="C_J"/>
-    </comp>
     <comp lib="0" loc="(1090,910)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="OUT_FROM_ALU"/>
@@ -89,9 +85,9 @@
       <a name="radix" val="10signed"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(1160,1050)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="CMP_RUN"/>
+    <comp lib="0" loc="(1170,1080)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="PUSH_DATA"/>
     </comp>
     <comp lib="0" loc="(1180,1020)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -101,10 +97,6 @@
     <comp lib="0" loc="(1190,960)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="IMM"/>
-    </comp>
-    <comp lib="0" loc="(1200,1080)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="a"/>
     </comp>
     <comp lib="0" loc="(1210,850)" name="Clock"/>
     <comp lib="0" loc="(1220,990)" name="Tunnel">
@@ -424,13 +416,17 @@
     <comp lib="0" loc="(2550,1160)" name="Tunnel">
       <a name="label" val="LESS_I"/>
     </comp>
+    <comp lib="0" loc="(790,1090)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="IMM"/>
+    </comp>
+    <comp lib="0" loc="(790,1130)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="J"/>
+    </comp>
     <comp lib="0" loc="(820,1210)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="c_1"/>
-    </comp>
-    <comp lib="0" loc="(840,1110)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="IMM"/>
     </comp>
     <comp lib="0" loc="(900,1150)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -468,17 +464,12 @@
     <comp lib="1" loc="(1110,910)" name="Controlled Buffer">
       <a name="width" val="16"/>
     </comp>
-    <comp lib="1" loc="(1130,1070)" name="NOT Gate"/>
     <comp lib="1" loc="(1130,860)" name="Controlled Buffer">
       <a name="width" val="16"/>
     </comp>
-    <comp lib="1" loc="(1220,960)" name="NOT Gate"/>
-    <comp lib="1" loc="(1230,1080)" name="NOT Gate"/>
-    <comp lib="1" loc="(1240,1050)" name="NOT Gate"/>
+    <comp lib="1" loc="(1240,1080)" name="NOT Gate"/>
     <comp lib="1" loc="(1240,850)" name="NOT Gate"/>
-    <comp lib="1" loc="(1290,1060)" name="AND Gate">
-      <a name="inputs" val="4"/>
-    </comp>
+    <comp lib="1" loc="(1300,1060)" name="NOR Gate"/>
     <comp lib="1" loc="(1340,920)" name="NOT Gate"/>
     <comp lib="1" loc="(1520,1250)" name="NOT Gate"/>
     <comp lib="1" loc="(1550,1340)" name="NOT Gate"/>
@@ -495,6 +486,7 @@
     </comp>
     <comp lib="1" loc="(2240,1240)" name="AND Gate"/>
     <comp lib="1" loc="(2550,1130)" name="Controlled Buffer"/>
+    <comp lib="1" loc="(840,1110)" name="OR Gate"/>
     <comp lib="1" loc="(850,1210)" name="NOT Gate"/>
     <comp lib="1" loc="(860,1250)" name="NOT Gate">
       <a name="facing" val="south"/>
@@ -506,7 +498,12 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="logisim_evolution"/>
       <a name="contents">addr/data: 16 16
-0 f0 ffff 80 0 a
+0 f0 ffff 80 5 8b 0 80
+10 70b f3 4 8c 0 8a 12
+8a 2c 76b f3 4 760 83 1
+8d 0 88 2c 8a 12 f2 4
+76c 70b f3 4 60c a f2 4
+70c f2 4 70c
 </a>
       <a name="dataWidth" val="16"/>
     </comp>
@@ -544,7 +541,6 @@
     <wire from="(1080,690)" to="(1100,690)"/>
     <wire from="(1080,730)" to="(1080,860)"/>
     <wire from="(1080,860)" to="(1110,860)"/>
-    <wire from="(1090,1070)" to="(1100,1070)"/>
     <wire from="(1100,880)" to="(1120,880)"/>
     <wire from="(1100,910)" to="(1100,920)"/>
     <wire from="(1110,910)" to="(1130,910)"/>
@@ -552,28 +548,26 @@
     <wire from="(1120,840)" to="(1120,870)"/>
     <wire from="(1120,840)" to="(1170,840)"/>
     <wire from="(1120,870)" to="(1120,880)"/>
-    <wire from="(1130,1070)" to="(1170,1070)"/>
     <wire from="(1130,860)" to="(1130,870)"/>
     <wire from="(1130,870)" to="(1130,910)"/>
     <wire from="(1130,870)" to="(1260,870)"/>
-    <wire from="(1160,1050)" to="(1210,1050)"/>
-    <wire from="(1170,1060)" to="(1170,1070)"/>
-    <wire from="(1170,1060)" to="(1210,1060)"/>
+    <wire from="(1170,1080)" to="(1210,1080)"/>
     <wire from="(1170,760)" to="(1170,840)"/>
     <wire from="(1180,1020)" to="(1310,1020)"/>
-    <wire from="(1210,1060)" to="(1210,1070)"/>
-    <wire from="(1210,1070)" to="(1240,1070)"/>
+    <wire from="(1190,960)" to="(1220,960)"/>
     <wire from="(1220,920)" to="(1220,930)"/>
     <wire from="(1220,920)" to="(1310,920)"/>
     <wire from="(1220,940)" to="(1220,960)"/>
     <wire from="(1220,940)" to="(1240,940)"/>
     <wire from="(1220,990)" to="(1340,990)"/>
-    <wire from="(1230,1080)" to="(1240,1080)"/>
     <wire from="(1240,940)" to="(1240,1040)"/>
     <wire from="(1260,870)" to="(1260,890)"/>
     <wire from="(1260,890)" to="(1330,890)"/>
-    <wire from="(1290,940)" to="(1290,1060)"/>
+    <wire from="(1290,1040)" to="(1310,1040)"/>
+    <wire from="(1290,940)" to="(1290,1040)"/>
     <wire from="(1290,940)" to="(1340,940)"/>
+    <wire from="(1300,1060)" to="(1310,1060)"/>
+    <wire from="(1310,1040)" to="(1310,1060)"/>
     <wire from="(1310,960)" to="(1310,1020)"/>
     <wire from="(1310,960)" to="(1340,960)"/>
     <wire from="(1330,890)" to="(1330,900)"/>
@@ -3422,15 +3416,15 @@
     <a name="simulationFrequency" val="1.0"/>
     <comp lib="0" loc="(230,160)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="O"/>
-      <a name="output" val="true"/>
+      <a name="label" val="I_1"/>
       <a name="radix" val="16"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(230,160)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="I_1"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="O"/>
+      <a name="output" val="true"/>
       <a name="radix" val="16"/>
       <a name="width" val="16"/>
     </comp>

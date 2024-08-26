@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class Assembler {
     static REG r0 = new REG(0);
@@ -34,8 +35,45 @@ public class Assembler {
     static StringBuilder BIN = new StringBuilder("000000000000000000000000111100001111111111111111");
     static int addressCounter = 3;
 
-    private static String bitsToHexConversion(String bitStream){
 
+
+
+    public static String BinToHex(String Bin){
+        int currentVal;
+        StringBuilder newString = new StringBuilder();
+        int h = 0;
+
+
+        for (int i = 0; i < Bin.length(); i+=4) {
+            h++;
+            try {
+                currentVal = Integer.parseInt(Bin.substring(i, i+4), 2);
+                if (currentVal<10){
+                    newString.append(currentVal);
+                }
+                else {
+                    switch (currentVal){
+                        case 10 -> newString.append("a");
+                        case 11 -> newString.append("b");
+                        case 12 -> newString.append("c");
+                        case 13 -> newString.append("d");
+                        case 14 -> newString.append("e");
+                        case 15 -> newString.append("f");
+                    }
+
+                }
+            }
+            catch (Exception e){
+                System.out.println("str_len"+newString.length());
+                System.out.println("i"+i);
+                System.out.println("h"+h);
+            }
+
+        }
+        return newString.toString();
+    }
+
+    private static String bitsToHexConversion(String bitStream){
         int byteLength = 4;
         int bitStartPos = 0, bitPos = 0;
         String hexString = "";
@@ -69,6 +107,8 @@ public class Assembler {
             sum = 0;
         }
         return hexString;
+
+
     }
     public static void OpBase(OP op, REG reg1, Object arg2) {
         addressCounter += arg2 instanceof REG ? 1 : 2;
@@ -132,7 +172,7 @@ public class Assembler {
         return this;
     }
     public Assembler JL(String label) {
-        OpBase(JL, r0, labels.get(label));
+        OpBase(JL, r0, label);
         return this;
     }
     public Assembler POP(REG arg1){
@@ -169,17 +209,37 @@ public class Assembler {
         labels.put(name, addressCounter);
         return this;
     }
+
+
     public void build(){
 
         System.out.println(labels);
+        System.out.println(instractions.size());
         System.out.println(instractions);
+        String str = "";
+        BIN.replace(0, BIN.length(),bitsToHexConversion(BIN.toString()));
         for (int i = 0; i<instractions.size(); i++) {
 
             System.out.println(i);
             System.out.println(instractions.get(i));
-            BIN.append(instractions.get(i).runInstruction(labels));
+            try {
+                if (Objects.equals(instractions.get(i).op.getId(), new OP(10).getId())){
+                    System.out.println("hi");
+                }
+                BIN.append(bitsToHexConversion(instractions.get(i).runInstruction(labels)));
+            }
+            catch (Exception e){
+                System.out.println(instractions.get(i).op.getId());
+                System.out.println(instractions.get(i).arg1.getId());
+                System.out.println(instractions.get(i).arg2);
+                System.out.println("gggggggggggggggggggggggggggggg");
+            }
         }
-        System.out.println(bitsToHexConversion(BIN.toString()));
+        System.out.println(BIN.length());
+        System.out.println(BIN);
+        System.out.println(str);
+//        System.out.println(BinToHex(BIN.toString()));
+        //System.out.println(bitsToHexConversion(BIN.toString()));
     }
 
 
