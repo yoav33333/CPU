@@ -29,6 +29,7 @@ public class Assembler {
     static OP JL = new OP(14);
     static HashMap<String, Integer> labels = new HashMap<String, Integer>();
     static List<instraction> instractions = new ArrayList<instraction>();
+    static int funcCounter = 0;
 
     static StringBuilder BIN = new StringBuilder("000000000000000000000000111100001111111111111111");
     static int addressCounter = 3;
@@ -114,7 +115,7 @@ public class Assembler {
         OpBase(JS, r0, label);
         return this;
     }
-    public Assembler JMP(String label) {
+    public Assembler JMP(Object label) {
         OpBase(JMP, r0, label);
         return this;
     }
@@ -144,6 +145,26 @@ public class Assembler {
         SUB(sp, 4);
         return this;
     }
+    public Assembler CALL(String label){
+        String Label = ""+funcCounter;
+        System.out.println(""+funcCounter);
+        funcCounter++;
+        WRT(r0, 0);
+        MOV(r0, Label);
+        PUSH(r0);
+        READ(r0, 0);
+        JMP(label);
+        Label(Label);
+        return this;
+    }
+    public Assembler RET(){
+        PUSH(r0);
+        READ(r0, bp);
+        JMP(r0);
+        POP(r0);
+        POP(r0);
+        return this;
+    }
     public Assembler Label(String name){
         labels.put(name, addressCounter);
         return this;
@@ -151,9 +172,11 @@ public class Assembler {
     public void build(){
 
         System.out.println(labels);
+        System.out.println(instractions);
         for (int i = 0; i<instractions.size(); i++) {
 
             System.out.println(i);
+            System.out.println(instractions.get(i));
             BIN.append(instractions.get(i).runInstruction(labels));
         }
         System.out.println(bitsToHexConversion(BIN.toString()));

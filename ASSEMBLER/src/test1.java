@@ -9,15 +9,7 @@ public class test1 {
     static REG sp = new REG(7);
 
     public static void main(String[] args) {
-        new Assembler()
-                .MOV(r0, 5)
-                .Label("fib")
-                .SUB(r0,1)
-                .ADD(r1, 1)
-                .CMP(r0,0)
-                .JZ("done")
-                .JMP("fib")
-                .Label("done")
-                .build();
+        new Assembler().CALL("i").JMP("done").Label("i")
+                .MOV(r0, 40).RET().Label("done").build();
     }
 }
