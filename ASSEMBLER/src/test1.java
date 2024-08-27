@@ -15,7 +15,7 @@ public class test1 {
         // r2 -> val2
         // r3 -> temp
         new Assembler()
-                .MOV(r1, 6)
+                .MOV(r1, 24)
                 .MOV(r2, 0)
                 .MOV(r3, 1)
                 .Label("loop")
@@ -27,9 +27,25 @@ public class test1 {
                 .SUB(r1, 1)
                 .JMP("loop")
                 .Label("end")
-                .build();
-        fib(6);
+                .OUT(r2)
+                .build("test1");
 
+//        new Assembler()
+//                .MOV(r0, 5)
+//                .CALL("h")
+//                .JMP("f")
+//                .Label("h")
+//                .PUSH(bp)
+//                .MOV(bp, sp)
+//                .SUB(r0, 1)
+//                .CMP(r0, 0)
+//                .JZ("end")
+//                .CALL("h")
+//                .Label("end")
+//                .POP(bp)
+//                .RET()
+//                .Label("f")
+//                .build();
 
 
     }

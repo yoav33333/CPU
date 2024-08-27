@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,11 +29,12 @@ public class Assembler {
     static OP READ = new OP(12);
     static OP CMP = new OP(13);
     static OP JL = new OP(14);
+    static OP OUT = new OP(15);
     static HashMap<String, Integer> labels = new HashMap<String, Integer>();
     static List<instraction> instractions = new ArrayList<instraction>();
     static int funcCounter = 0;
 
-    static StringBuilder BIN = new StringBuilder("000000000000000000000000111100001111111111111111");
+    static StringBuilder BIN = new StringBuilder("0000000000000000000000001111000011111111111111110000011101100000");
     static int addressCounter = 3;
 
 
@@ -175,6 +177,11 @@ public class Assembler {
         OpBase(JL, r0, label);
         return this;
     }
+    public Assembler OUT(REG display) {
+        OpBase(OUT, display, r0);
+        return this;
+    }
+
     public Assembler POP(REG arg1){
         ADD(sp, 1);
         READ(arg1, sp);
@@ -213,21 +220,18 @@ public class Assembler {
     }
 
 
-    public void build(){
+    public void build(String outName) {
 
         System.out.println(labels);
         System.out.println(instractions.size());
         System.out.println(instractions);
-        String str = "";
         BIN.replace(0, BIN.length(),bitsToHexConversion(BIN.toString()));
         for (int i = 0; i<instractions.size(); i++) {
 
             System.out.println(i);
             System.out.println(instractions.get(i));
             try {
-                if (Objects.equals(instractions.get(i).op.getId(), new OP(10).getId())){
-                    System.out.println("hi");
-                }
+
                 BIN.append(bitsToHexConversion(instractions.get(i).runInstruction(labels)));
             }
             catch (Exception e){
@@ -235,11 +239,12 @@ public class Assembler {
                 System.out.println(instractions.get(i).arg1.getId());
                 System.out.println(instractions.get(i).arg2);
                 System.out.println("gggggggggggggggggggggggggggggg");
+                break;
             }
         }
         System.out.println(BIN.length());
         System.out.println(BIN);
-        System.out.println(str);
+        new Write_hex_code(outName).write(BIN.toString());
 //        System.out.println(BinToHex(BIN.toString()));
         //System.out.println(bitsToHexConversion(BIN.toString()));
     }
