@@ -176,31 +176,33 @@ public class Assembler {
         return this;
     }
     public Assembler POP(REG arg1){
-        ADD(sp, 4);
+        ADD(sp, 1);
         READ(arg1, sp);
         return this;
     }
     public Assembler PUSH(REG arg1){
         WRT(arg1, sp);
-        SUB(sp, 4);
+        SUB(sp, 1);
         return this;
     }
     public Assembler CALL(String label){
         String Label = ""+funcCounter;
         System.out.println(""+funcCounter);
         funcCounter++;
-        WRT(r0, 0);
+        WRT(r0, r5);
         MOV(r0, Label);
         PUSH(r0);
-        READ(r0, 0);
+        READ(r0, r5);
         JMP(label);
         Label(Label);
         return this;
     }
     public Assembler RET(){
         PUSH(r0);
-        READ(r0, bp);
+        SUB(sp, 1);
+        READ(r0, sp);
         JMP(r0);
+        ADD(sp, 1);
         POP(r0);
         POP(r0);
         return this;

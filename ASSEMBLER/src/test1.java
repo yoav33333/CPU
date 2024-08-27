@@ -10,23 +10,39 @@ public class test1 {
 
 
     public static void main(String[] args) {
+        // r0 -> n
+        // r1 -> val1
+        // r2 -> val2
+        // r3 -> temp
         new Assembler()
-                .MOV(r0, 5)
-                .CALL("fib")
-                .JMP("f")
-                .Label("fib")
-                .PUSH(bp)
-                .MOV(bp, sp)
-                .SUB(r0, 1)
-                .CMP(r0, 0)
-                .JZ("f")
-                .JMP("fib")
-                .POP(bp)
-                .RET()
-                .Label("f")
+                .MOV(r1, 6)
+                .MOV(r2, 0)
+                .MOV(r3, 1)
+                .Label("loop")
+                .CMP(r1, 0)
+                .JZ("end")
+                .MOV(r4, r2)
+                .MOV(r2, r3)
+                .ADD(r3, r4)
+                .SUB(r1, 1)
+                .JMP("loop")
+                .Label("end")
                 .build();
+        fib(6);
 
 
 
+    }
+    public static void fib(int n) {
+        int val1 = 0;
+        int val2 = 1;
+
+        while (n > 0) {
+            int temp = val1;
+            val1 = val2;
+            val2 += temp;
+            n--;
+        }
+        System.out.println(val1);
     }
 }
