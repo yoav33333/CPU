@@ -14,38 +14,56 @@ public class test1 {
         // r1 -> val1
         // r2 -> val2
         // r3 -> temp
-//        new Assembler()
-//                .MOV(r1, 24)
-//                .MOV(r2, 0)
-//                .MOV(r3, 1)
-//                .Label("loop")
-//                .CMP(r1, 0)
-//                .JZ("end")
-//                .MOV(r4, r2)
-//                .MOV(r2, r3)
-//                .ADD(r3, r4)
-//                .SUB(r1, 1)
-//                .JMP("loop")
-//                .Label("end")
-//                .OUT(r2)
-//                .build("test1");
-
         new Assembler()
-                .MOV(r1, 5)
-                .CALL("h")
-                .JMP("f")
-                .Label("h")
-                .PUSH(bp)
-                .MOV(bp, sp)
-                .SUB(r1, 1)
+                .MOV(r1, 24)
+                .MOV(r2, 0)
+                .MOV(r3, 1)
+                .Label("loop")
                 .CMP(r1, 0)
                 .JZ("end")
-                .CALL("h")
+                .MOV(r4, r2)
+                .MOV(r2, r3)
+                .ADD(r3, r4)
+                .SUB(r1, 1)
+                .JMP("loop")
                 .Label("end")
-                .POP(bp)
-                .RET()
-                .Label("f")
-                .build("rec");
+                .OUT(r2)
+                .build("test1");
+
+        // rbp -> bp
+        // rsp -> sp
+        // rbx -> r1
+        // rdi -> r2
+        // rax -> r3
+//        new Assembler()
+//                .MOV(r2, 6)
+//                .CALL("fib")
+//                .OUT(r3)
+//                .JMP("f")
+//                .Label("fib")
+//                .PUSH(bp)
+//                .MOV(bp, sp)
+//                .PUSH(r1)
+//                .PUSH(r2)
+//                .MOV(r3, r2)
+//                .CMP(r3, 2)
+//                .JZ("done")
+//                .SUB(r3, 1)
+//                .MOV(r2, r3)
+//                .CALL("fib")
+//                .MOV(r1, r3)
+//                .MOV(r3, r2)
+//                .SUB(r3, 1)
+//                .MOV(r2, r3)
+//                .CALL("fib")
+//                .ADD(r3, r1)
+//                .Label("done")
+//                .POP(r2)
+//                .POP(r1)
+//                .POP(bp)
+//                .RET()
+//                .Label("f")
+//                .build("rec");
 
 
     }

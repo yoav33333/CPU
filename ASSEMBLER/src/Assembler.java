@@ -35,7 +35,7 @@ public class Assembler {
     static int funcCounter = 0;
 
     static StringBuilder BIN = new StringBuilder("0000000000000000000000001111000011111111111111110000011101100000");
-    static int addressCounter = 4;
+    static int addressCounter = BIN.length()/4;
 
 
 
