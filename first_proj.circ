@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="3.8.0" version="1.0">
-  This file is intended to be loaded by Logisim-evolution v3.8.0(https://github.com/logisim-evolution/).
+<project source="4.0.0dev" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v4.0.0dev(https://github.com/logisim-evolution/).
 
   <lib desc="#Wiring" name="0">
     <tool name="Pin">
@@ -540,9 +540,11 @@
       <a name="addrWidth" val="16"/>
       <a name="appearance" val="logisim_evolution"/>
       <a name="contents">addr/data: 16 16
-0 f0 ffff 760 90 15 a0 0
-b0 1 9d 0 88 14 240 320
-432 93 1 8a 9 2f
+0 f0 ffff 760 90 5 80 d
+70b f3 1 8a f 8a 27 76b
+f3 1 760 93 1 9d 0 88
+20 80 20 70b f3 1 8a f
+f2 1 76c f2 1 70c a
 </a>
       <a name="dataWidth" val="16"/>
     </comp>
@@ -3516,15 +3518,15 @@ b0 1 9d 0 88 14 240 320
     <a name="simulationFrequency" val="1.0"/>
     <comp lib="0" loc="(230,160)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="O"/>
-      <a name="output" val="true"/>
+      <a name="label" val="I_1"/>
       <a name="radix" val="16"/>
       <a name="width" val="16"/>
     </comp>
     <comp lib="0" loc="(230,160)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="I_1"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="O"/>
+      <a name="output" val="true"/>
       <a name="radix" val="16"/>
       <a name="width" val="16"/>
     </comp>

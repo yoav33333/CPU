@@ -35,7 +35,7 @@ public class Assembler {
     static int funcCounter = 0;
 
     static StringBuilder BIN = new StringBuilder("0000000000000000000000001111000011111111111111110000011101100000");
-    static int addressCounter = 3;
+    static int addressCounter = 4;
 
 
 
@@ -196,22 +196,15 @@ public class Assembler {
         String Label = ""+funcCounter;
         System.out.println(""+funcCounter);
         funcCounter++;
-        WRT(r0, r5);
         MOV(r0, Label);
         PUSH(r0);
-        READ(r0, r5);
         JMP(label);
         Label(Label);
         return this;
     }
     public Assembler RET(){
-        PUSH(r0);
-        SUB(sp, 1);
-        READ(r0, sp);
+        POP(r0);
         JMP(r0);
-        ADD(sp, 1);
-        POP(r0);
-        POP(r0);
         return this;
     }
     public Assembler Label(String name){
